@@ -1,0 +1,13 @@
+{
+  "name": "backendandchai",
+  "version": "1.0.0",
+  "description": "backebdCourse",
+  "license": "ISC",
+  "author": "Gagan Nahak",
+  "type": "module",
+  "main": "index.js",
+  
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
