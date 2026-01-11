@@ -3,11 +3,21 @@
 import dotenv from 'dotenv'
 
 import connectDB from "./db/index.js";
+import { app } from './app.js';
 
 dotenv.config({
     path:'./env'
 })
-connectDB()
+connectDB().then(()=>{
+  app.listen(process.env.PORT ||80000 ,()=>{
+    console.log(`App is Running on ${process.env.PORT}`);
+    
+  })
+  
+}).catch((err)=>{
+  console.log("Databse Connection Error",err);
+  
+})
 
 
 /*
