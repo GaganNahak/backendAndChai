@@ -50,10 +50,10 @@ const userSchema=new  Schema({
 
 },{timestamps:true})
 
-userSchema.pre("save", async function (next){
-    if(!this.password.isModified("password")) return next()
-    this.password=bcrypt.hash(this.password,10)
-    next()
+userSchema.pre("save", async function (){
+    if(!this.isModified("password")) return
+    this.password = await bcrypt.hash(this.password, 10)
+return 
 })
 
 userSchema.methods.isPasswordCorrect=async function(password) {
@@ -83,4 +83,4 @@ process.env.REFRESH_TOKEN_SECRETE,
 })
 }
 
- const User=mongoose.model("User",userSchema)
+ export const User=mongoose.model("User",userSchema)

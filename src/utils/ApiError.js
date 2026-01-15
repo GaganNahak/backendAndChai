@@ -4,7 +4,7 @@ class ApiError{
         errors=[],
         stack=''
     ){
-        super(messege)
+        // super(messege)
         this.statusCode=statusCode
         this.messege=messege
         this.errors=errors

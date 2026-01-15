@@ -9,11 +9,11 @@ dotenv.config({
     path:'./env'
 })
 connectDB().then(()=>{
-  app.listen(process.env.PORT ||80000 ,()=>{
-    console.log(`App is Running on ${process.env.PORT}`);
-    
+  const port = process.env.PORT || 3000;
+  app.listen(port, ()=>{
+    console.log(`App is Running on http://localhost:${port}`);
   })
-  
+
 }).catch((err)=>{
   console.log("Databse Connection Error",err);
   

@@ -3,7 +3,7 @@ import { json } from "express"
 
 
 const asyncHandler=(reqHandler)=>{
-     (req,res,next)=>{
+   return  (req,res,next)=>{
         Promise.resolve(reqHandler(req,res,next)).catch((err)=>next(err))
     }
 }
@@ -19,3 +19,5 @@ const asyncHandler=(reqHandler)=>{
         }))
     }
 }*/
+
+export {asyncHandler};
