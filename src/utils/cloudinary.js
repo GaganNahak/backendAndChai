@@ -25,4 +25,25 @@ cloudinary.config({
         }
     }
 
+    const deleteFromCloudinary=async(fileUrl)=>{
+        const part=fileUrl?.split('/upload/')[1]
+        const withoutVersion=part.replace(/^v\d\//, '')
+        const publicId=withoutVersion.replace(/\.[^/.]+$/, '')
+        console.log(publicId);
+        
+        try {
+            const result =await cloudinary.uploader.destroy(publicId,{
+                resource_type:'video',
+                invalidate:true
+            })
+            return result;
+        } catch (error) {
+            console.log(error);
+            
+        }
+
+
+    }
+
     export default uploadOnCloudinary;
+    export {deleteFromCloudinary}
