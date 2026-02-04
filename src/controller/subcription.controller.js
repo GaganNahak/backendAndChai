@@ -79,7 +79,7 @@ if(!isChannelExist) throw new ApiError(404,"Channel not found")
          const options={
         page:1,
         limit:10
-    }
+    } 
         const subscription=//await Subscription.aggregatePaginate(
         await Subscription.aggregate([
             {

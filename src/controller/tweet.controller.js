@@ -15,7 +15,7 @@ const creatTweet=asyncHandler(async(req,res)=>{
 
     const tweet=await Tweet.create({
         content:content,
-        owner:ownerId
+        owner:ownerId 
     })
     const isTweetCreated=Tweet.findById(tweet._id)
     if(!isTweetCreated) throw new ApiError(500,"something wenr wrong in creating tweet")

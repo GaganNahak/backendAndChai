@@ -1,6 +1,7 @@
 import { Router } from "express";
-import { loginUser, logOut, registerUser,generateNewAccesToken, upDatePassword,updateAccountDetails ,updateAvatar,updateCoverImage,getCurrentUser
-    ,getChannelProfile
+import { registerUser,loginUser,logOut,generateNewAccesToken,
+    upDatePassword,updateAccountDetails,updateAvatar,
+    updateCoverImage,getCurrentUser,getChannelProfile,getWatchHistory
 } 
 from "../controller/user.controller.js";
 
@@ -17,7 +18,7 @@ router.route('/register').post(
             maxCount:1
         },
         {
-            name:"coverImage",
+             name:"coverImage",
             maxCount:1
         }
     ])
@@ -32,6 +33,7 @@ router.route('/update-user').patch(verifyJwt,updateAccountDetails)
 router.route('/update-avatar').patch(verifyJwt,upload.single('avatar'),updateAvatar)
 router.route('/update-coverimage').patch(verifyJwt,upload.single('coverImage'),updateCoverImage)
 router.route('/getuser').get(verifyJwt,getCurrentUser)
+router.route('/gethistory').get(verifyJwt,getWatchHistory)
 router.route('/c/:username').get(verifyJwt,getChannelProfile)
  
 export default router

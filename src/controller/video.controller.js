@@ -94,10 +94,10 @@ const updateVideo=asyncHandler(async(req,res)=>{
 
 const deleteVideo=asyncHandler(async(req,res)=>{
     const {videoId} =req.params
-console.log(videoId);
+// console.log(videoId);
 
      const video=await Video.findById(videoId)
-     console.log(video);
+    //  console.log(video);
      
     if(req.user?._id.toString()!==video.owner.toString()) throw new ApiError(401,'unauthorized')
     await deleteFromCloudinary(video.videofile)
