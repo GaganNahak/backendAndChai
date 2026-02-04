@@ -98,7 +98,7 @@ const{refreshToken,accessToken}=await generateAccessAndRefreshToken(user._id)
 
 const loggedInUser= await User.findById(user._id).select("-password -refreshToken")
 
-return res.status(200).cookie("accessToken",accessToken,{httpOnly:true,secure:true}).cookie("refreshToken",refreshToken,{httpOnly:true,secure:true}).json(
+return res.status(200).cookie("accessToken",accessToken,{httpOnly:true,secure:true,sameSite:none}).cookie("refreshToken",refreshToken,{httpOnly:true,secure:true}).json(
     new ApiResponse(200,{
         user:loggedInUser,accessToken,refreshToken
     },"user logged in..")
