@@ -116,7 +116,7 @@ await User.findOneAndUpdate(req.user?._id,{
     }
 )
 
-return res.status(200).clearCookie("accessToken",{httpOnly:true,secure:true,sameSite:'none'}).clearCookie("refreshToken",{httpOnly:true,secure:true}).json(
+return res.status(200).clearCookie("accessToken",{httpOnly:true,secure:true,sameSite:'none'}).clearCookie("refreshToken",{httpOnly:true,secure:true,sameSite:'none'}).json(
     new ApiResponse(200,{
       
     },"user logged out.."))
