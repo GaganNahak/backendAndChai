@@ -134,11 +134,11 @@ const generateNewAccesToken=asyncHandler(async(req,res)=>{
          if(!user) throw new ApiError(401,"refresh token not found")
             
          if(incomingRefreshToken!==user.refreshToken) throw new ApiError(401,'expired or invalid refresh token')
-           const{newRefreshToken,accessToken}=await generateAccessAndRefreshToken(user._id)
-        user.refreshToken=newRefreshToken;
-        user.accessToken=accessToken
-        await user.save({validateBeforeSave:false})
-        return res.status(201).cookie("refreshToken",newRefreshToken,{httpOnly:true,secure:true,sameSite:'none'})
+           const{refreshToken,accessToken}=await generateAccessAndRefreshToken(user._id)
+        // user.refreshToken=newRefreshToken;
+        // user.accessToken=accessToken
+        // await user.save({validateBeforeSave:false})
+        return res.status(201).cookie("refreshToken",refreshToken,{httpOnly:true,secure:true,sameSite:'none'})
         .cookie("accessToken",accessToken,{httpOnly:true,secure:true,sameSite:'none'})
         .json(
             new ApiResponse(200,{
@@ -147,6 +147,8 @@ const generateNewAccesToken=asyncHandler(async(req,res)=>{
             },"access token refreshed")
         )
     } catch (error) {
+        console.log(error);
+        
         throw new ApiError(401,'inavalid refresh token')
     }
 
