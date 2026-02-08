@@ -142,7 +142,7 @@ const generateNewAccesToken=asyncHandler(async(req,res)=>{
         .cookie("accessToken",accessToken,{httpOnly:true,secure:true,sameSite:'none'})
         .json(
             new ApiResponse(200,{
-                refreshToken:newRefreshToken,
+                refreshToken:refreshToken,
                 accessToken
             },"access token refreshed")
         )
