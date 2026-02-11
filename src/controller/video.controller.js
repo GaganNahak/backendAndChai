@@ -11,7 +11,7 @@ const getAllVideos=asyncHandler(async(req,res)=>{
         ispublished:true
     }
     if(query){
-        filter.query={$regex:query,Option:"i"}
+        filter.query={$regex:query}
     }
     const skip=(Number(page)-1)*Number(limit)
     const sortoption={
