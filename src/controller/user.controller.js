@@ -228,7 +228,7 @@ const channel=await User.aggregate([
             //it will searches all the document where channel is equal to username
             //as final all document document will come whose channel value is username
             $lookup:{
-                from:"Subscription",
+                from:"subscription",
                 localField:"_id",
                 foreignField:"channel",
                 as:"subcribers"
@@ -238,9 +238,9 @@ const channel=await User.aggregate([
         {
             //to find subcriptiion of a channel
             $lookup:{
-                from:"Subscription",
+                from:"subscription",
                 localField:"_id",
-                foreignField:"subscriber",
+                foreignField:"subscribers",
                 as:"subcribedTo"
             }
         },
