@@ -29,6 +29,7 @@ const getChannelstats=asyncHandler(async(req,res)=>{
     }
     ])
     const totalSubscribers=await Subscription.countDocuments({channel:channelId})
+     const totalSubscribed=await Subscription.countDocuments({subscribers:channelId})
     const totalLike= await Video.aggregate([
         {
             $match:{
@@ -60,7 +61,7 @@ const getChannelstats=asyncHandler(async(req,res)=>{
     ])
     // console.log(totalLike[0]);
     
-    return res.status(200).json(new ApiResponse(200,{totalViwesAndVideos,totalSubscribers,totalLike},"channel dashboard fetched"))
+    return res.status(200).json(new ApiResponse(200,{totalViwesAndVideos,totalSubscribers,totalLike,totalSubscribed},"channel dashboard fetched"))
 })
 
 const getChannelVideos=asyncHandler(async(req,res)=>{
