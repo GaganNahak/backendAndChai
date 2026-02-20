@@ -42,7 +42,7 @@ const getVideoComments=asyncHandler(async(req,res)=>{
                 from:"likes",
                 localField:"_id",
                 foreignField:"comment",
-                as:"like"
+                as:"likes"
             }
         },{
                     $addFields:{
