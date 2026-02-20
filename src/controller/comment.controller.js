@@ -56,7 +56,7 @@ const getVideoComments=asyncHandler(async(req,res)=>{
             $project:{
                 content:1,
                 owner:1,
-                like:1,
+                likes:1,
                 likesCount:1,
                 createdAt:1
             }
