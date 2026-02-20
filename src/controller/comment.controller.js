@@ -38,14 +38,25 @@ const getVideoComments=asyncHandler(async(req,res)=>{
             ]
            } 
         },{
+            $lookup:{
+                from:"likes",
+                localField:"_id",
+                foreignField:"comment",
+                as:"like"
+            }
+        },{
                     $addFields:{
-                        owner:{$first:"$owner"}
+                        owner:{$first:"$owner"},
+                        likes:{
+                            $size:"$likes"
+                        }
                     }
                 },
         {
             $project:{
                 content:1,
                 owner:1,
+                likes:1,
                 createdAt:1
             }
         }
