@@ -53,7 +53,41 @@ const getVideoById=asyncHandler(async(req,res)=>{
     const {videoId}=req.params
     
     if(!videoId) throw new ApiError(401,"cannot fing videos")
-    const video=await Video.findById(videoId).populate("owner","username avatar")
+    // const video=await Video.findById(videoId).populate("owner","username avatar")
+const video=Video.aggregate([
+    {
+        $match:{_id:new mongoose.Types.ObjectId(videoId)}
+    },{
+        $lookup:{
+            from:"users",
+            localField:"owner",
+            foreignField:"_id",
+            as:"owner",
+            pipeline:[
+                {
+                    $project:{
+                        username:1,
+                        avatar:1
+                    }
+                }
+            ]
+        }
+    },{
+        $lookup:{
+            from:"likes",
+            localField:"_id",
+            foreignField:"video",
+            as:"likes",
+        }
+    },{
+        $addFields:{
+        owner:{$first:"$owner"},
+        likesCount:{
+        $size:"$likes"
+               }
+                 }
+      }
+])
 if(!video)  throw new ApiError(400,"failed to get video")
     video.views+=1
 await video.save()
@@ -64,6 +98,7 @@ if(req.user){
         }
     },{new:true})
 }
+
     return res.status(200).json(new ApiResponse(200,video,'video fetched..'))
 })
 
