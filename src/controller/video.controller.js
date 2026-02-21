@@ -55,7 +55,7 @@ const getVideoById=asyncHandler(async(req,res)=>{
     
     if(!videoId) throw new ApiError(401,"cannot fing videos")
     // const video=await Video.findById(videoId).populate("owner","username avatar")
-const video=Video.aggregate([
+const video=await Video.aggregate([
     {
         $match:{_id:new mongoose.Types.ObjectId(videoId)}
     },{
