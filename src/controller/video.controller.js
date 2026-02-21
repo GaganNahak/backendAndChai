@@ -89,9 +89,12 @@ const video=Video.aggregate([
                  }
       }
 ])
+console.log(video);
+
 if(!video)  throw new ApiError(400,"failed to get video")
-    video.views+=1
-await video.save()
+    await Video.updateOne({
+_id:videoId},
+{$inc:{views:1}})
 if(req.user){
     await User.findByIdAndUpdate(req.user._id,{
         $addToSet:{
